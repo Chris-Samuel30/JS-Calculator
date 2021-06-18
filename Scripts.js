@@ -12,30 +12,7 @@ let operator = null;
 //Checks whether the firstValue and operators have been entered and returns a boolean, initalized as false
 let expectingSecondValue = false;
 
-
-
-
-
-// GETTING ELEMENTS, DIFFERENT BUTTON CLASSES
-
-// Gets array of buttons with the class of number (these are numbers 0 through 9)
-const calculatorNumber = document.getElementsByClassName("number");
-
-// Gets array of buttons with the class of operation (these are +, -, x and /)
-const calculatorOperator = document.getElementsByClassName("operation");
-
-// Gets button with the ID of equals (this is the = button)
-const calculatorEquals = document.getElementsByClassName("equals");
-
-// Get button with the ID of clear (this is the clear button)
-const calculatorClear = document.getElementsByClassName("clear");
-
-// Get button with the ID of decimal (this is the . button)
-const calculatorDecimal = document.getElementsByClassName("decimal")
-
-
 //FUNCTIONS
-
 
 // Get the calculator display class and set the value of the display to the displayValue variable 
 
@@ -103,7 +80,7 @@ let currentDisplay = parseFloat(screenDisplay);
   expectingSecondValue = true;
 }
 
-//This function calculates the operations based on which operator was clicked. These can be addition, subtraction, multiplication or division. If we click equals, we assume an 
+//This function calculates the operations based on which operator was clicked. These can be addition, subtraction, multiplication or division. If we click equals, we assume an operator has already been clicked, so we just return the secondNumber.
 
 function calculateOperation (firstNumber, secondNumber, operator){
   if (operator === '+'){
@@ -118,9 +95,8 @@ function calculateOperation (firstNumber, secondNumber, operator){
    return secondNumber;
 }
 
-function resetCalculator() {
 //Reset all variables being stored back to their original values
-
+function resetCalculator() {
 screenDisplay = '0';
 firstValue = null;
 operator = null;
@@ -129,16 +105,24 @@ expectingSecondValue = false;
 }
 
 
+//Using query selector, we can get the calculator buttons class items and store them in a variable. We are then adding a click event listener to all calculator buttons/keys. To do this, we are destructuring the click event and getting the target property from the event. The target returns the element that was clicked so we can use its properties.
+
+//If the target clicked is not a button element (using the matches property), don't return anything!
+
+//Now, we are just matching up the classNames of each button to differentiate them and deciding which function will fire when a button is clicked. These functions take in the value of the button that was pressed (target.value where target is the specific element that was clicked)
+
+//After a function runs, the display will update. This will occur when anything runs.
+
+
+
 
 const keys = document.querySelector('.calculator__buttons');
 
 keys.addEventListener('click', (event) => {
-    const { target } = event;
-    
+    const { target } = event;   
     if (!target.matches("button")){
         return;
       }
-
     if (target.classList.contains('operation')) {
         console.log('operation', target.value);
         operatorCheck(target.value);
