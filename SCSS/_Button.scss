@@ -1,0 +1,45 @@
+$primary-color: rgb(224, 224, 219);
+$equals-color:blue;
+$clear-color:red;
+$secondary-text:white;
+
+
+
+%calculator__buttons 
+{
+    height:60px;
+    background-color: $primary-color;
+    border-radius:3px;
+    border:1px solid black;
+    font-size:large;
+        &:hover{
+                background-color:darken($color: $primary-color, $amount: 10)
+        }
+}
+
+%equals__button {
+    height:100%;
+    color:$secondary-text;
+    background-color:$equals-color;
+    grid-row:2/6;
+    grid-column:4/5;  
+    &:hover {
+        background-color:lighten($color: $equals-color, $amount: 20)
+    }
+}
+
+%clear__button {
+    color:$secondary-text;
+    background-color:$clear-color;
+    &:hover {
+        background-color:lighten($color: $clear-color, $amount: 20)
+    }
+}
+
+%operations__button {
+    color:blue;
+    &:hover{
+        font-weight:bold;
+    }
+
+}
